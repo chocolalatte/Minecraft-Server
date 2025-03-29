@@ -79,8 +79,6 @@ spec:
           value: "TRUE"
         - name: SEED
           value: "4668041971450772477"
-        - name: MAX_BUILD_HEIGHT
-          value: "512"
         #- name: ICON
           #value: 'https://cdn.discordapp.com/attachments/901610285901692979/1354986653143531591/icon.png?ex=67e74928&is=67e5f7a8&hm=d8fe3a321a57917351c40395bec37bb8e2947e95ebe599b806039376c121ba67&'
         - name: MOTD
