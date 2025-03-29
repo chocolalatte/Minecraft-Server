@@ -1,0 +1,149 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mc-datadir
+  labels:
+    app: mc
+  annotations:
+    volume.beta.kubernetes.io/storage-class: lvms-vg1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: lvms-vg1
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mc-secret
+  labels:
+    app: mc
+type: Opaque
+data:
+  rcon-password:  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mc
+  labels:
+    app: mc
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mc
+  template:
+    metadata:
+      labels:
+        app: mc
+    spec:
+      containers:
+      - name: mc
+        image: itzg/minecraft-server:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 14Gi
+        volumeMounts:
+        - name: datadir
+          mountPath: /data
+        env:
+        # Modpack properties
+        - name: MODPACK_VERSION
+          value: "0.5.0"
+        - name: MODPACK_PLATFORM
+          value: MODRINTH
+        - name: MODRINTH_MODPACK
+          value: "http://192.168.99.56:8000/pack.mrpack"
+        - name: VERSION
+          value: 1.20.1
+        - name: FABRIC_LOADER_VERSION
+          value: "0.16.10"
+        # Container properties
+        - name: MEMORY
+          value: "12G"
+        - name: JVM_XX_OPTS
+          value: "-Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true"
+        - name: ENABLE_RCON
+          value: "true"
+        - name: DEBUG
+          value: "FALSE"
+        # mc-server properties
+        - name: EULA
+          value: "TRUE"
+        - name: SEED
+          value: "4668041971450772477"
+        - name: MAX_BUILD_HEIGHT
+          value: "512"
+        - name: ICON
+          value: 'https://cdn.discordapp.com/attachments/901610285901692979/1354986653143531591/icon.png?ex=67e74928&is=67e5f7a8&hm=d8fe3a321a57917351c40395bec37bb8e2947e95ebe599b806039376c121ba67&'
+        - name: MOTD
+          value: Running %MODPACK_NAME% version %env:MODPACK_VERSION%
+        - name: DIFFICULTY
+          value: normal
+        - name: ENABLE_WHITELIST
+          value: "TRUE"
+        - name: MAX_PLAYERS
+          value: "10"
+        - name: OPS
+          value: Cinna_Chocolate
+        - name: WHITELIST
+          value: |
+            Cinna_Chocolate
+            Xx_Wi11ow_xX
+            spookme420
+            Topilpop
+            cb74b280-b61c-4f59-91bf-6d07b7b5f616
+        ports:
+        - name: minecraft
+          containerPort: 25565
+          protocol: TCP
+        - name: rcon
+          containerPort: 25575
+          protocol: TCP
+        - name: voicechat
+          containerPort: 24454
+          protocol: UDP
+      volumes:
+      - name: datadir
+        persistentVolumeClaim:
+          claimName: mc-datadir
+#      readinessProbe:
+#        tcpSocket:
+#          port: 25565
+#        initialDelaySeconds: 30
+#        periodSeconds: 5
+#        failureThreshold: 10
+#        successThreshold: 1
+#        timeoutseconds: 1
+#      livenessProbe:
+#        tcpSocket:
+#          port: 25565
+#        initialDelaySeconds: 30
+#        periodSeconds: 5
+#        failureThreshold: 10
+#        successThreshold: 1
+#        timeoutseconds: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mc
+  namespace: minecraft
+  labels:
+    app: mc
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      targetPort: 25565 
+      port: 25565
+      nodePort: 30000
+  selector:
+    app: mc
