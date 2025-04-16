@@ -54,50 +54,38 @@ spec:
         - name: datadir
           mountPath: /data
         env:
-        # Modpack properties
-        - name: MODPACK_VERSION
-          value: "0.5.0"
-        - name: MODPACK_PLATFORM
-          value: MODRINTH
-        - name: MODRINTH_MODPACK
-          value: "http://192.168.99.56:8000/pack.mrpack"
-        - name: VERSION
-          value: 1.20.1
-        - name: FABRIC_LOADER_VERSION
-          value: "0.16.10"
-        # Container properties
+        - name: EULA
+          value: "TRUE"
         - name: MEMORY
           value: "12G"
         - name: JVM_XX_OPTS
           value: "-Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true"
         - name: ENABLE_RCON
           value: "true"
-        - name: DEBUG
-          value: "FALSE"
-        # mc-server properties
-        - name: EULA
-          value: "TRUE"
-        - name: SEED
-          value: "4668041971450772477"
-        #- name: ICON
-          #value: 'https://cdn.discordapp.com/attachments/901610285901692979/1354986653143531591/icon.png?ex=67e74928&is=67e5f7a8&hm=d8fe3a321a57917351c40395bec37bb8e2947e95ebe599b806039376c121ba67&'
+        - name: VERSION
+          value: 1.20.1
+        - name: FABRIC_LOADER_VERSION
+          value: "0.14.22"
         - name: MOTD
           value: Running %MODPACK_NAME% version %env:MODPACK_VERSION%
+        - name: DEBUG
+          value: "FALSE"
+        - name: MODPACK_PLATFORM
+          value: MODRINTH
+        - name: MODRINTH_MODPACK
+          value: "/data/mods/pack.mrpack"
+        - name: MODPACK_NAME
+          value: "silly-server-pack"
+        - name: MODPACK_VERSION
+          value: "0.0.1"
         - name: DIFFICULTY
           value: normal
         - name: ENABLE_WHITELIST
           value: "TRUE"
-        - name: MAX_PLAYERS
-          value: "10"
+        - name: WHITELIST
+          value: Cinna_Chocolate
         - name: OPS
           value: Cinna_Chocolate
-        - name: WHITELIST
-          value: |
-            Cinna_Chocolate
-            Xx_Wi11ow_xX
-            spookme420
-            Topilpop
-            cb74b280-b61c-4f59-91bf-6d07b7b5f616
         ports:
         - name: minecraft
           containerPort: 25565
