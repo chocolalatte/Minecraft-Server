@@ -6,17 +6,17 @@ spec:
   template:
     spec:
       initContainers:
-      - name: curl
-        image: curlimages/curl
-        command: 
-        - sh
-        - -c
-        args:
-        - mkdir -p /data/mods; curl -o /data/mods/pack.mrpack -L https://github.com/chocolalatte/Minecraft-Server/raw/refs/heads/main/pack.mrpack;
-        volumeMounts:
-        - name: datadir
-          mountPath: /data
+        - name: curl
+          image: curlimages/curl
+          command:
+            - sh
+            - -c
+          args:
+            - mkdir -p /data/mods; curl -o /data/mods/pack.mrpack -L https://github.com/chocolalatte/Minecraft-Server/raw/refs/heads/main/overlays/lily-main/pack.mrpack;
+          volumeMounts:
+            - name: datadir
+              mountPath: /data
       volumes:
-      - name: datadir
-        persistentVolumeClaim:
-          claimName: minecraft-datadir
+        - name: datadir
+          persistentVolumeClaim:
+            claimName: minecraft-datadir
