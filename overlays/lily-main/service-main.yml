@@ -4,12 +4,12 @@ kind: Service
 metadata:
   name: service
   labels:
-    app: minecraft
+    app: minecraft-main
 spec:
   type: NodePort
   ports:
     - protocol: TCP
-      targetPort: 25565 
+      targetPort: 25565
       port: 25565
       nodePort: 30000
       name: minecraft
@@ -22,6 +22,6 @@ spec:
       targetPort: 24454
       port: 24454
       nodePort: 30002
-      name: voice 
+      name: voice
   selector:
-    app: minecraft
+    app: minecraft-main
