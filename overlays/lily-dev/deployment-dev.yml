@@ -12,7 +12,7 @@ spec:
         - sh
         - -c
         args:
-        - mkdir -p /data/mods; curl -o /data/mods/pack.mrpack -L https://github.com/chocolalatte/Minecraft-Server/raw/refs/heads/dev/base/pack.mrpack;
+        - mkdir -p /data/mods; curl -o /data/mods/pack.mrpack -L https://github.com/chocolalatte/Minecraft-Server/raw/refs/heads/dev/imports/pack.mrpack;
         volumeMounts:
         - name: datadir
           mountPath: /data

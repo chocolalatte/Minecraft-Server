@@ -50,6 +50,8 @@ spec:
               value: "silly-server-pack"
             - name: MODPACK_VERSION
               value: "0.0.1"
+            - name: ICON
+              value: "/imports/icon.png"
             - name: DIFFICULTY
               value: normal
             - name: SEED
