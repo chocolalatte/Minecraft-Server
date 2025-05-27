@@ -3,12 +3,13 @@ kind: Kustomization
 
 namespace: lily
 nameSuffix: -dev
+commonLabels:
+  app: minecraft-dev
 
 resources:
-- ../../base
+  - ../../base
 
 patches:
-- path: deployment-dev.yml
-- path: pvc-dev.yml
-- path: service-dev.yml
-
+  - path: deployment-dev.yml
+  - path: pvc-dev.yml
+  - path: service-dev.yml

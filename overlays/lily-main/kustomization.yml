@@ -3,10 +3,11 @@ kind: Kustomization
 
 namespace: lily
 nameSuffix: -main
+commonLabels:
+  app: minecraft-main
 
 resources:
-- ../../base
+  - ../../base
 
 patches:
-- path: deployment-main.yml
-
+  - path: deployment-main.yml

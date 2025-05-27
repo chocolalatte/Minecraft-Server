@@ -9,7 +9,7 @@ spec:
   type: NodePort
   ports:
     - protocol: TCP
-      targetPort: 25565 
+      targetPort: 25565
       port: 25565
       nodePort: 30010
       name: minecraft
@@ -22,6 +22,6 @@ spec:
       targetPort: 24454
       port: 24454
       nodePort: 30012
-      name: voice 
+      name: voice
   selector:
     app: minecraft
