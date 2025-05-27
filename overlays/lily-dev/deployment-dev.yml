@@ -46,6 +46,7 @@ spec:
             Topilpop
             AstrumHero
             Java861
+            Sunkissedmist
             cb74b280-b61c-4f59-91bf-6d07b7b5f616
         ports:
         - name: minecraft
