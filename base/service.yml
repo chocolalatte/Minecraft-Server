@@ -26,6 +26,7 @@ spec:
     - protocol: TCP
       targetPort: 30003
       port: 30003
+      nodePort: 30003
       name: trackmap
   selector:
     app: minecraft
