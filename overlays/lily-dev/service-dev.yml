@@ -18,9 +18,9 @@ spec:
       port: 25575
       nodePort: 30011
       name: rcon
-    - protocol: TCP
-      targetPort: 24454
-      port: 24454
+    - protocol: UDP
+      targetPort: 30002
+      port: 30002
       nodePort: 30012
       name: voice
   selector:
