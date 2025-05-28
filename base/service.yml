@@ -9,7 +9,7 @@ spec:
   type: NodePort
   ports:
     - protocol: TCP
-      targetPort: 25565 
+      targetPort: 25565
       port: 25565
       nodePort: 30000
       name: minecraft
@@ -18,10 +18,10 @@ spec:
       port: 25575
       nodePort: 30001
       name: rcon
-    - protocol: TCP
-      targetPort: 24454
-      port: 24454
+    - protocol: UDP
+      targetPort: 30002
+      port: 30002
       nodePort: 30002
-      name: voice 
+      name: voice
   selector:
     app: minecraft
