@@ -1,7 +1,7 @@
 # This is a copy of the minecraft info google doc found [here](https://docs.google.com/document/d/1aVOYEOftEsvlVb9I2s22hSNT7qydCiJFhffJJZ50Q-k/edit?usp=sharing)
 
 1. Install the modpack[^1].  
-   1. Download the [modpack](https://github.com/chocolalatte/Minecraft-Server/blob/main/base/pack.mrpack). Open the link then click the download icon (or press ctrl+shift+s)  
+   1. Download the [modpack](https://github.com/chocolalatte/Minecraft-Server/blob/main/imports/pack.mrpack). Open the link then click the download icon (or press ctrl+shift+s)  
    2. Open modrinth and import the modpack file.  
 2. Allocate memory.  
    1. Find the modpack in modrinth.  
