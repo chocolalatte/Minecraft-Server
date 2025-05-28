@@ -23,5 +23,9 @@ spec:
       port: 30002
       nodePort: 30002
       name: voice
+    - protocol: TCP
+      targetPort: 30003
+      port: 30003
+      name: trackmap
   selector:
     app: minecraft
