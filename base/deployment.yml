@@ -55,7 +55,7 @@ spec:
             - name: DIFFICULTY
               value: normal
             - name: SEED
-              value: "4668041971450772477"
+              value: "3437056259091691500"
             - name: ENABLE_WHITELIST
               value: "TRUE"
             - name: WHITELIST
